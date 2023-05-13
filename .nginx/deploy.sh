@@ -1,8 +1,8 @@
 #!bin/bash
 
 #  Clonare repo
-git clone asdasd
-cd clonedrepo
+git clone git@github.com:jimmysafe/sdi-coop-receiver.git
+cd sdi-coop-receiver
 
 yarn install
 yarn build
