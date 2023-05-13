@@ -43,7 +43,7 @@ const soapWsdl = fs.readFileSync(
 
 app.get("/", (_: any, res: any) => {
   console.log("HIT HOMEPAGE");
-  res.send("ok dude");
+  res.send("online");
 });
 
 app.listen(port, () => {
