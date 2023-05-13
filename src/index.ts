@@ -33,10 +33,6 @@ app.listen(port, () => {
     path: "/wsdl",
     services: services,
     xml: soapWsdl,
-    //  wsdl_options: {
-    //    key,
-    //    cert,
-    //  },
     callback: () => {
       console.log(
         `🚀 Soap Server Ready. Test on http://localhost:${port}/wsdl?wsdl`

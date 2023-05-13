@@ -1,0 +1,24 @@
+#!bin/bash
+
+#  Clonare repo
+git clone asdasd
+cd clonedrepo
+
+yarn install
+yarn build
+
+# Copiare Certificati
+
+cp certs/SDI-12779961007-server.key /etc/ssl/
+cp certs/SDI-12779961007-server.pem /etc/ssl/
+cp certs/CAEntrateAll.pem /etc/ssl/
+
+rm /etc/nginx/sites-available/default
+cp .nginx/default /etc/nginx/sites-available/
+
+#  Restart nginx
+sudo nginx -t
+sudo service nginx restart
+
+# Start application 
+pm2 start dist/index.js --watch --ignore-watch="node_modules"

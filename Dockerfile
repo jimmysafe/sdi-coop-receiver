@@ -1,6 +1,6 @@
 FROM nginx:alpine
 
-COPY .nginx/nginx.conf /etc/nginx/conf.d/default.conf
+COPY .nginx/nginx.conf /etc/nginx/sites-available/default.conf
 
 # Install bash
 RUN apk add bash
@@ -11,9 +11,9 @@ RUN node --version && npm --version
 
 WORKDIR /app
 
-COPY certs/SDI-12779961007-server.key /etc/nginx/certs/
-COPY certs/SDI-12779961007-server.pem /etc/nginx/certs/
-COPY certs/CAEntrateAll.pem /etc/nginx/certs/
+COPY certs/SDI-12779961007-server.key /etc/ssl/
+COPY certs/SDI-12779961007-server.pem /etc/ssl/
+COPY certs/CAEntrateAll.pem /etc/ssl/
 
 COPY . .
 
