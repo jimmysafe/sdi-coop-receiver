@@ -29,21 +29,37 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const soap = __importStar(require("soap"));
 const fs_1 = __importDefault(require("fs"));
 const express_1 = __importDefault(require("express"));
+const axios_1 = __importDefault(require("axios"));
+const dotenv = __importStar(require("dotenv"));
+dotenv.config();
 const port = 8000;
 const app = (0, express_1.default)();
+console.log(process.env.SERVER_URL);
+const notifica = async (args, type = "failure") => {
+    try {
+        await axios_1.default.post(`${process.env.SERVER_URL}/fte-notifica`, Object.assign({ Success: type === "success" }, args));
+    }
+    catch (err) {
+        console.log(err);
+    }
+};
 const services = {
     TrasmissioneFatture_service: {
         TrasmissioneFatture_port: {
-            RicevutaConsegna: async (args) => console.log(args),
-            NotificaMancataConsegna: async (args) => console.log(args),
-            NotificaScarto: async (args) => console.log(args),
-            NotificaEsito: async (args) => console.log(args),
-            NotificaDecorrenzaTermini: async (args) => console.log(args),
-            AttestazioneTrasmissioneFattura: async (args) => console.log(args),
+            RicevutaConsegna: async () => { },
+            NotificaMancataConsegna: async () => { },
+            NotificaScarto: async (args) => notifica(args),
+            NotificaEsito: async (args) => notifica(args, "success"),
+            NotificaDecorrenzaTermini: async () => { },
+            AttestazioneTrasmissioneFattura: async () => { },
         },
     },
 };
 const soapWsdl = fs_1.default.readFileSync(`${__dirname}/TrasmissioneFatture_v1.1.wsdl`, "utf8");
+app.get("/", (_, res) => {
+    console.log("HIT HOMEPAGE");
+    res.send("ok dude");
+});
 app.listen(port, () => {
     soap.listen(app, {
         path: "/wsdl",

@@ -1,19 +1,37 @@
 import * as soap from "soap";
 import fs from "fs";
 import express from "express";
+import { TypesfileSdIType } from "src/types";
+import axios from "axios";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 const port = 8000;
 const app = express();
 
+const notifica = async (
+  args: TypesfileSdIType,
+  type: "success" | "failure" = "failure"
+) => {
+  try {
+    await axios.post(`${process.env.SERVER_URL}/fte-notifica`, {
+      Success: type === "success",
+      ...args,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const services = {
   TrasmissioneFatture_service: {
     TrasmissioneFatture_port: {
-      RicevutaConsegna: async (args: any) => console.log(args),
-      NotificaMancataConsegna: async (args: any) => console.log(args),
-      NotificaScarto: async (args: any) => console.log(args),
-      NotificaEsito: async (args: any) => console.log(args),
-      NotificaDecorrenzaTermini: async (args: any) => console.log(args),
-      AttestazioneTrasmissioneFattura: async (args: any) => console.log(args),
+      RicevutaConsegna: async () => {},
+      NotificaMancataConsegna: async () => {},
+      NotificaScarto: async (args: any) => notifica(args),
+      NotificaEsito: async (args: any) => notifica(args, "success"),
+      NotificaDecorrenzaTermini: async () => {},
+      AttestazioneTrasmissioneFattura: async () => {},
     },
   },
 };
