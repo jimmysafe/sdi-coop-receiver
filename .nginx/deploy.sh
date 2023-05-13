@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/sh
 
 #  Clonare repo
 git clone git@github.com:jimmysafe/sdi-coop-receiver.git
