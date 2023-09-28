@@ -26,9 +26,9 @@ server {
         ssl_verify_depth 5;
         ssl_client_certificate /etc/ssl/CAEntrateAll_new.pem;
 
-        set $canlog 1;
-        if ( $uri ~ ^/nginx_status ) {
-                set $canlog 0;
+        set $canlog 0;
+        if ( $uri ~ ^/wsdl ) {
+                set $canlog 1;
         }
 
         access_log /var/log/nginx/access.log custom_json if=$canlog;
