@@ -14,8 +14,7 @@ const notifica = async (
   type: "success" | "failure" = "failure"
 ) => {
   try {
-    console.log("ARGS: ", args);
-    console.log("Da SDI: ", args.IdentificativoSdI);
+    console.log("Da SDI: ", args);
     await axios.post(`${process.env.SERVER_URL}/fte-notifica`, {
       Success: type === "success",
       ...args,
