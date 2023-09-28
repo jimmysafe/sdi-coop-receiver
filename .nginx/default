@@ -12,8 +12,8 @@ log_format custom_json escape=json
         '}';
 
 server {
-        listen 80;
-        listen 443 ssl;
+        listen 0.0.0.0:80;
+        listen 0.0.0.0:443 ssl;
         ssl_certificate /etc/ssl/SDI-12779961007-server.pem;
         ssl_certificate_key /etc/ssl/SDI-12779961007-server.key;
         ssl_protocols SSLv2 SSLv3 TLSv1 TLSv1.1 TLSv1.2;
@@ -43,7 +43,7 @@ server {
                 proxy_set_header X-Forwarded-Proto $scheme;
 
                 # the real magic is here where we forward requests to the address that the Node.js server is running on
-                proxy_pass http://localhost:8000;
+                proxy_pass http://127.0.0.1:8000;
 	}
 }
 
