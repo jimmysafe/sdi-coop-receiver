@@ -12,6 +12,7 @@ yarn build
 cp certs/SDI-12779961007-server.key /etc/ssl/
 cp certs/SDI-12779961007-server.pem /etc/ssl/
 cp certs/CAEntrateAll.pem /etc/ssl/
+cp certs/CAEntrateAll_new.pem /etc/ssl/
 
 rm /etc/nginx/sites-available/default
 cp .nginx/default /etc/nginx/sites-available/

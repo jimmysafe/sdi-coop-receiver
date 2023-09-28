@@ -14,6 +14,7 @@ WORKDIR /app
 COPY certs/SDI-12779961007-server.key /etc/ssl/
 COPY certs/SDI-12779961007-server.pem /etc/ssl/
 COPY certs/CAEntrateAll.pem /etc/ssl/
+COPY certs/CAEntrateAll_new.pem /etc/ssl/
 
 COPY . .
 
