@@ -11,11 +11,10 @@ log_format custom_json escape=json
         '"http_user_agent":"$http_user_agent"'
         '}';
 
-map $status $loggable {
-  ~^[4]   0;
-  default 1;
-}
-
+# map $status $loggable {
+#  ~^[4]   0;
+#  default 1;
+# }
 
 server {
         listen 0.0.0.0:80;
@@ -27,7 +26,12 @@ server {
         ssl_verify_depth 5;
         ssl_client_certificate /etc/ssl/CAEntrateAll_new.pem;
 
-        access_log /var/log/nginx/access.log combined if=$loggable;
+        set $canlog 1;
+        if ( $uri ~ ^/nginx_status ) {
+                set $canlog 0;
+        }
+
+        access_log /var/log/nginx/access.log custom_json if=$canlog;
         error_log /var/log/nginx/error.log;
 
 	root /var/www/html;
