@@ -14,6 +14,7 @@ const notifica = async (
   type: "success" | "failure" = "failure"
 ) => {
   try {
+    console.log("ARGS: ", args);
     console.log("Da SDI: ", args.IdentificativoSdI);
     await axios.post(`${process.env.SERVER_URL}/fte-notifica`, {
       Success: type === "success",
@@ -43,7 +44,6 @@ const soapWsdl = fs.readFileSync(
 );
 
 app.get("/", (_: any, res: any) => {
-  console.log("HIT HOMEPAGE");
   res.send(`online: ${process.env.SERVER_URL}`);
 });
 
