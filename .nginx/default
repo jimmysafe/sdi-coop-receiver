@@ -19,7 +19,7 @@ log_format custom_json escape=json
 server {
         listen 0.0.0.0:80;
         listen 0.0.0.0:443 ssl;
-        ssl_certificate /etc/ssl/SDI-12779961007-server.pem;
+        ssl_certificate /etc/ssl/server.pem;
         ssl_certificate_key /etc/ssl/SDI-12779961007-server.key;
         ssl_protocols SSLv2 SSLv3 TLSv1 TLSv1.1 TLSv1.2;
         ssl_verify_client optional;
