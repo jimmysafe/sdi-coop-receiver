@@ -27,8 +27,9 @@ const notifica = async (
 const services = {
   TrasmissioneFatture_service: {
     TrasmissioneFatture_port: {
-      RicevutaConsegna: async () => {},
-      NotificaMancataConsegna: async () => {},
+      RicevutaConsegna: async () => console.log("Ricevuta Consegna!"),
+      NotificaMancataConsegna: async () =>
+        console.log("Notifica Mancata Consegna"),
       NotificaScarto: async (args: any) => notifica(args),
       NotificaEsito: async (args: any) => notifica(args, "success"),
       NotificaDecorrenzaTermini: async () => {},
